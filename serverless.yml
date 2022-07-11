@@ -1,0 +1,44 @@
+service: user
+# app and org for use with dashboard.serverless.com
+
+frameworkVersion: "3"
+
+useDotenv: true
+provider:
+  name: aws
+  timeout: 10
+  runtime: nodejs16.x
+  region: sa-east-1
+
+plugins:
+  - serverless-offline
+  - serverless-dotenv-plugin
+
+functions:
+  listUser:
+    handler: userRouter.getUser
+    events:
+      - httpApi:
+          path: /user
+          method: get
+
+  createUser:
+    handler: userRouter.addUser
+    events:
+      - httpApi:
+          path: /new-user
+          method: post
+
+  updateUser:
+    handler: userRouter.updateUser
+    events:
+      - httpApi:
+          path: /user/{id}
+          method: put
+
+  deleteUser:
+    handler: userRouter.deleteUser
+    events:
+      - httpApi:
+          path: /user/{id}
+          method: delete
