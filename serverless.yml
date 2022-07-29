@@ -15,30 +15,65 @@ plugins:
   - serverless-dotenv-plugin
 
 functions:
-  listUser:
-    handler: userRouter.getUser
+  getUserByEmail:
+    handler: ./router/userWebRouter.getUserByEmail
     events:
       - httpApi:
-          path: /user
+          path: /api/user/{email}
           method: get
 
-  createUser:
-    handler: userRouter.addUser
+  getAllUsers:
+    handler: ./router/userWebRouter.getAllUsers
     events:
       - httpApi:
-          path: /new-user
+          path: /api/users
+          method: get
+
+  postNewUser:
+    handler: ./router/userWebRouter.postNewUser
+    events:
+      - httpApi:
+          path: /api/user
           method: post
 
-  updateUser:
-    handler: userRouter.updateUser
+  putUser:
+    handler: ./router/userWebRouter.putUser
     events:
       - httpApi:
-          path: /user/{id}
+          path: /api/user/{id}
           method: put
 
   deleteUser:
-    handler: userRouter.deleteUser
+    handler: ./router/userWebRouter.deleteUser
     events:
       - httpApi:
-          path: /user/{id}
+          path: /api/user/{id}
           method: delete
+
+  # listUser:
+  #   handler: userRouter.getUser
+  #   events:
+  #     - httpApi:
+  #         path: /user
+  #         method: get
+
+  # createUser:
+  #   handler: userRouter.addUser
+  #   events:
+  #     - httpApi:
+  #         path: /new-user
+  #         method: post
+
+  # updateUser:
+  #   handler: userRouter.updateUser
+  #   events:
+  #     - httpApi:
+  #         path: /user/{id}
+  #         method: put
+
+  # deleteUser:
+  #   handler: userRouter.deleteUser
+  #   events:
+  #     - httpApi:
+  #         path: /user/{id}
+  #         method: delete
