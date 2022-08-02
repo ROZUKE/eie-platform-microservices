@@ -65,6 +65,19 @@ const getAllUsers = async (event, context, callback) => {
   }
 };
 
+const getInfoForDashboard = async (event, context, callback) => {
+  context.callbackWaitsForEmptyEventLoop = false;
+
+  try {
+    const info = await service.countDataForPanel();
+    if (info !== null) {
+      callback(null, info);
+    }
+  } catch (error) {
+    callback(error);
+  }
+};
+
 const putUser = async (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
   try {
@@ -107,10 +120,25 @@ const deleteUser = async (event, context, callback) => {
   }
 };
 
+const postUserToCourse = async (event, context, callback) => {
+  context.callbackWaitsForEmptyEventLoop = false;
+  try {
+    const { cursoId, email } = JSON.parse(event.body);
+    const response = await service.addUserToCourse(cursoId, email);
+    if (response !== null) {
+      callback(null, response);
+    }
+  } catch (error) {
+    callback(error);
+  }
+};
+
 module.exports = {
   getUserByEmail,
   postNewUser,
   getAllUsers,
   putUser,
   deleteUser,
+  getInfoForDashboard,
+  postUserToCourse,
 };

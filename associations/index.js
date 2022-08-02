@@ -1,6 +1,8 @@
 const { UserSchema } = require("../models/userModel.js");
 const { PersonSchema } = require("../models/personModel.js");
 const { RolSchema } = require("../models/rolModel.js");
+const { CourseSchema } = require("../models/courseModel.js");
+const { UserCourseSchema } = require("../models/userCourseModel.js");
 
 //Person associations
 PersonSchema.hasOne(UserSchema, {
@@ -16,3 +18,25 @@ RolSchema.hasOne(UserSchema, {
   },
 });
 UserSchema.belongsTo(RolSchema);
+
+UserSchema.belongsToMany(CourseSchema, {
+  through: UserCourseSchema,
+  foreignKey: "curso_id",
+});
+CourseSchema.belongsToMany(UserSchema, {
+  through: UserCourseSchema,
+  foreignKey: "usuario_id",
+});
+UserSchema.hasMany(UserCourseSchema, {
+  foreignKey: {
+    field: "usuario_id",
+  },
+});
+UserCourseSchema.belongsTo(UserSchema);
+
+CourseSchema.hasMany(UserCourseSchema, {
+  foreignKey: {
+    field: "curso_id",
+  },
+});
+UserCourseSchema.belongsTo(CourseSchema);

@@ -50,6 +50,19 @@ functions:
           path: /api/user/{id}
           method: delete
 
+  getInfoForDashboard:
+    handler: ./router/userWebRouter.getInfoForDashboard
+    events:
+      - httpApi:
+          path: /api/users/dashboard
+          method: get
+
+  postUserToCourse:
+    handler: ./router/userWebRouter.postUserToCourse
+    events:
+      - httpApi:
+          path: /api/user/course
+          method: post
   # listUser:
   #   handler: userRouter.getUser
   #   events:
