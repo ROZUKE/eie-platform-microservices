@@ -63,30 +63,25 @@ functions:
       - httpApi:
           path: /api/user/course
           method: post
-  # listUser:
-  #   handler: userRouter.getUser
-  #   events:
-  #     - httpApi:
-  #         path: /user
-  #         method: get
 
-  # createUser:
-  #   handler: userRouter.addUser
-  #   events:
-  #     - httpApi:
-  #         path: /new-user
-  #         method: post
+  # mobile functions
+  getInfoStudentByEmail:
+    handler: ./router/userMobileRouter.getInfoStudentByEmail
+    events:
+      - httpApi:
+          path: /api/user/student/{email}
+          method: get
 
-  # updateUser:
-  #   handler: userRouter.updateUser
-  #   events:
-  #     - httpApi:
-  #         path: /user/{id}
-  #         method: put
+  getCourseInfoByUserId:
+    handler: ./router/userMobileRouter.getCourseInfoByUserId
+    events:
+      - httpApi:
+          path: /api/user/course/{userId}
+          method: get
 
-  # deleteUser:
-  #   handler: userRouter.deleteUser
-  #   events:
-  #     - httpApi:
-  #         path: /user/{id}
-  #         method: delete
+  getTeacherCourse:
+    handler: ./router/userMobileRouter.getTeacherCourse
+    events:
+      - httpApi:
+          path: /api/user/teacher/course/{courseId}
+          method: get

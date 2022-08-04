@@ -3,6 +3,8 @@ const { PersonSchema } = require("../models/personModel.js");
 const { RolSchema } = require("../models/rolModel.js");
 const { CourseSchema } = require("../models/courseModel.js");
 const { UserCourseSchema } = require("../models/userCourseModel.js");
+const { BookSchema } = require("../models/bookModel.js");
+const { LessonSchema } = require("../models/lessonModel.js");
 
 //Person associations
 PersonSchema.hasOne(UserSchema, {
@@ -40,3 +42,20 @@ CourseSchema.hasMany(UserCourseSchema, {
   },
 });
 UserCourseSchema.belongsTo(CourseSchema);
+
+// Course associations
+
+BookSchema.hasOne(CourseSchema, {
+  foreignKey: {
+    field: "cur_libro_id",
+  },
+});
+CourseSchema.belongsTo(BookSchema);
+
+BookSchema.hasMany(LessonSchema, {
+  foreignKey: {
+    field: "lec_libro_id",
+  },
+});
+
+LessonSchema.belongsTo(BookSchema);
